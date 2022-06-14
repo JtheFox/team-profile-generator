@@ -1,7 +1,7 @@
 // package imports
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateMarkdown = require('./utils/generateHTML');
+const generateHTML = require('./utils/generateHTML');
 
 function getMemberPrompts(role) {
     const roleQuestion = new Map(Object.entries({
