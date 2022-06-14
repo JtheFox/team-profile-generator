@@ -30,7 +30,12 @@ function getMemberPrompts(role) {
 }
 
 function writeHTML(html) {
-    //TODO: write data to file
+    try {
+        fs.writeFileSync('generated.html', html)
+        console.log('Page successfully created at generated.html');
+    } catch {
+        console.log('Error writing to file, please try again.');
+    }
 }
 
 async function init() {
