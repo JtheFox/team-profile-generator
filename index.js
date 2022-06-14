@@ -5,21 +5,9 @@ const generateHTML = require('./utils/generateHTML');
 
 function getMemberPrompts(role) {
     const roleQuestion = new Map(Object.entries({
-        manager: {
-            type: 'input',
-            name: 'office',
-            message: 'Enter the member\'s office number:'
-        },
-        engineer: {
-            type: 'input',
-            name: 'github',
-            message: 'Enter the member\'s GitHub username:'
-        },
-        intern: {
-            type: 'input',
-            name: 'school',
-            message: 'Enter the member\'s school name:'
-        }
+        manager: 'Enter the member\'s office number:',
+        engineer: 'Enter the member\'s GitHub username:',
+        intern: 'Enter the member\'s school name:'
     }));
 
    return [
@@ -33,7 +21,11 @@ function getMemberPrompts(role) {
             name: 'email',
             message: 'Enter the member\'s email:'
         },
-        roleQuestion.get(role)
+        {
+            type: 'input',
+            name: 'info',
+            message: roleQuestion.get(role)
+        }
     ]
 }
 
