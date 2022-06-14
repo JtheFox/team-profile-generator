@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateHTML');
 
-function promptMember(role) {
+function getMemberPrompts(role) {
     const roleQuestion = Object.entries({
         manager: {
             type: 'input',
@@ -22,7 +22,7 @@ function promptMember(role) {
         }
     });
 
-   const memberQuestions = [
+   return [
         {
             type: 'input',
             name: 'name',
@@ -33,7 +33,7 @@ function promptMember(role) {
             name: 'email',
             message: 'Enter the member\'s email:'
         },
-        roleQuestion.get(role) || roleQuestion.get('engineer')
+        roleQuestion.get(role)
     ]
 }
 
@@ -52,11 +52,13 @@ async function init() {
     team.members = [];
     for (let i = 0; i < team.count; i++) {
         let rolePrompt = await inquirer.prompt([{
-            type: 'input',
+            type: 'list',
             name: 'role',
-            message: 'Enter the team member\'s role (manager, engineer, intern, etc):\n'
+            message: 'Choose the team member\'s role:',
+            choices: [{name: 'Manager', value: 'manager'}, {name: 'Engineer', value: 'engineer'}, {name: 'Intern', value: 'intern'}]
         }]);
-        console.log('Role', role)
+        let infoPrompt = await inquirer.prompt(getMemberPrompts(rolePrompt.role));
+        console.log(infoPrompt)
     }
 }
 
