@@ -4,7 +4,7 @@ const fs = require('fs');
 const generateMarkdown = require('./utils/generateHTML');
 
 function getMemberPrompts(role) {
-    const roleQuestion = Object.entries({
+    const roleQuestion = new Map(Object.entries({
         manager: {
             type: 'input',
             name: 'office',
@@ -20,7 +20,7 @@ function getMemberPrompts(role) {
             name: 'school',
             message: 'Enter the member\'s school name:'
         }
-    });
+    }));
 
    return [
         {
@@ -35,6 +35,10 @@ function getMemberPrompts(role) {
         },
         roleQuestion.get(role)
     ]
+}
+
+function writeHTML(html) {
+    //TODO: write data to file
 }
 
 async function init() {
@@ -54,12 +58,18 @@ async function init() {
         let rolePrompt = await inquirer.prompt([{
             type: 'list',
             name: 'role',
-            message: 'Choose the team member\'s role:',
+            message: `Choose team member ${i}'s role:`,
             choices: [{name: 'Manager', value: 'manager'}, {name: 'Engineer', value: 'engineer'}, {name: 'Intern', value: 'intern'}]
         }]);
         let infoPrompt = await inquirer.prompt(getMemberPrompts(rolePrompt.role));
-        console.log(infoPrompt)
+        team.members.push({
+            id: i+1,
+            ...rolePrompt,
+            ...infoPrompt
+        })
     }
+    console.log('Generating a webpage for your team...');
+    writeHTML(generateHTML(team.members));
 }
 
 init();
