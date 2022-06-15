@@ -35,8 +35,8 @@ function writeHTML(html) {
 }
 
 async function init() {
-    var id = 1;
     const team = [];
+    var id = 1;
     const manager = await inquirer.prompt([
         {
             type: 'input',
@@ -57,13 +57,12 @@ async function init() {
     team.push({ id, role: 'manager', ...manager })
     do {
         id++;
-        rolePrompt = await inquirer.prompt({
+        var { role } = await inquirer.prompt({
             type: 'list',
             name: 'role',
             message: 'Add a team member:',
             choices: [{ name: 'Engineer', value: 'engineer' }, { name: 'Intern', value: 'intern' }, { name: 'Done adding members', value: false }]
         });
-        role = rolePrompt.role;
         if (role) {
             let member = await inquirer.prompt(getMemberPrompts(role));
             team.push({ id, role, ...member });
