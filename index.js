@@ -3,11 +3,9 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generateHTML = require('./utils/generateHTML');
 
+//TODO: comment code 
+//TODO: add input validators?
 function getMemberPrompts(role) {
-    const roleQuestions = {
-        engineer: 'Enter the engineer\'s GitHub username:',
-        intern: 'Enter the intern\'s school name:'
-    };
     return [
         {
             type: 'input',
@@ -22,7 +20,7 @@ function getMemberPrompts(role) {
         {
             type: 'input',
             name: 'info',
-            message: roleQuestions[role]
+            message: role === 'engineer' ? 'Enter the intern\'s school name:' : 'Enter the intern\'s school name:'
         }
     ]
 }
