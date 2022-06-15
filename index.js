@@ -1,7 +1,7 @@
 // package imports
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateHTML = require('./utils/generateHTML');
+const generateHTML = require('./src/generateHTML');
 
 //TODO: comment code 
 //TODO: add input validators?
@@ -27,7 +27,7 @@ function getMemberPrompts(role) {
 
 function writeHTML(html) {
     try {
-        fs.writeFileSync('team.html', html)
+        fs.writeFileSync('./dist/team.html', html)
         console.log('Page successfully created at team.html');
     } catch {
         console.log('Error writing to file, please try again.');
