@@ -1,32 +1,32 @@
-const roles = new Map(Object.entries({
+const roleDisplay = {
     manager: {
         icon: 'fa-user-tie',
-        cardInfo(info) {return `Office number: ${info}`;}
+        cardInfo(info) { return `Office number: ${info}`; }
     },
     engineer: {
         icon: 'fa-helmet-safety',
-        cardInfo(info) {return `GitHub: <a href="https://github.com/${info}">${info}</a>`;}
+        cardInfo(info) { return `GitHub: <a href="https://github.com/${info}">${info}</a>`; }
 
     },
     intern: {
         icon: 'fa-graduation-cap',
-        cardInfo(info) {return `School: ${info}`;}
+        cardInfo(info) { return `School: ${info}`; }
     }
-}));
+};
 
 function generateMemberCard(member) {
     return `<article class="card bg-light m-4" style="min-width: 16rem;">
             <div class="card-header bg-primary text-light p-3">
                 <p class="h4">${member.name}</p>
                 <div class="d-flex align-items-center h5">
-                    <i class="fa-solid ${roles.get(member.role).icon}"></i>
+                    <i class="fa-solid ${roleDisplay[member.role].icon}"></i>
                     <p class="ms-2 my-0">${member.role}</p>
                 </div>
             </div>
             <div class="card-body">
                 <p>ID: ${member.id}</p>
                 <p>Email: <a href="mailto:${member.email}">${member.email}</a></p>
-                <p>${roles.get(member.role).cardInfo(member.info)}</p>
+                <p>${roleDisplay[member.role].cardInfo(member.info)}</p>
             </div>
         </article>`;
 }
