@@ -8,8 +8,7 @@ function getMemberPrompts(role) {
         engineer: 'Enter the engineer\'s GitHub username:',
         intern: 'Enter the intern\'s school name:'
     };
-
-   return [
+    return [
         {
             type: 'input',
             name: 'name',
@@ -57,7 +56,7 @@ async function init() {
             message: 'Enter the manager\'s office number:'
         }
     ]);
-    team.push({id, role: 'manager', ...manager})
+    team.push({ id, role: 'manager', ...manager })
     let role = true;
     do {
         id++;
@@ -65,12 +64,12 @@ async function init() {
             type: 'list',
             name: 'role',
             message: 'Add a team member:',
-            choices: [{name: 'Engineer', value: 'engineer'}, {name: 'Intern', value: 'intern'}, {name: 'Done adding members', value: false}]
+            choices: [{ name: 'Engineer', value: 'engineer' }, { name: 'Intern', value: 'intern' }, { name: 'Done adding members', value: false }]
         });
         role = rolePrompt.role;
         if (role) {
             let member = await inquirer.prompt(getMemberPrompts(role));
-            team.push({id, role, ...member});
+            team.push({ id, role, ...member });
         }
     } while (role)
     console.log('Generating a webpage for your team...');
