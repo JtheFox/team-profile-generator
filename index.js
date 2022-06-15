@@ -31,7 +31,7 @@ function getMemberPrompts(role) {
 
 function writeHTML(html) {
     try {
-        fs.writeFileSync('generated.html', html)
+        fs.writeFileSync('team.html', html)
         console.log('Page successfully created at generated.html');
     } catch {
         console.log('Error writing to file, please try again.');
