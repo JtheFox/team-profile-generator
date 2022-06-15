@@ -55,7 +55,6 @@ async function init() {
         }
     ]);
     team.push({ id, role: 'manager', ...manager })
-    let role = true;
     do {
         id++;
         rolePrompt = await inquirer.prompt({
